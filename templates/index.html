@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Check Weather for Your Event</h2>
+    <form action="/check-weather" method="POST">
+        <div class="form-group">
+            <label for="country"><i class="fas fa-globe"></i> Country:</label>
+            <input type="text" id="country" name="country" required placeholder="e.g., United States">
+        </div>
+
+        <div class="form-group">
+            <label for="city"><i class="fas fa-city"></i> City:</label>
+            <input type="text" id="city" name="city" required placeholder="e.g., New York">
+        </div>
+
+        <div class="form-group">
+            <label for="place"><i class="fas fa-map-marker-alt"></i> Specific Place (optional):</label>
+            <input type="text" id="place" name="place" placeholder="e.g., Central Park">
+        </div>
+
+        <div class="form-group">
+            <label for="event_date"><i class="fas fa-calendar"></i> Event Date:</label>
+            <input type="date" id="event_date" name="event_date" required>
+        </div>
+
+        <button type="submit" class="btn-primary">
+            <i class="fas fa-search"></i> Check Weather
+        </button>
+    </form>
+</div>
+
+<div class="info-section">
+    <h3>How it works:</h3>
+    <div class="features">
+        <div class="feature">
+            <i class="fas fa-temperature-high"></i>
+            <h4>Temperature Analysis</h4>
+            <p>Checks if temperature is ideal (18-28°C)</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-cloud-rain"></i>
+            <h4>Precipitation Check</h4>
+            <p>Warns about rain, snow, or storms</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-wind"></i>
+            <h4>Wind Assessment</h4>
+            <p>Evaluates wind speed for comfort</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-calendar-alt"></i>
+            <h4>Smart Recommendations</h4>
+            <p>Suggests better days and locations</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('event_date').min = new Date().toISOString().split('T')[0];
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 15);
+    document.getElementById('event_date').max = maxDate.toISOString().split('T')[0];
+</script>
+{% endblock %}

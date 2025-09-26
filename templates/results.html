@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="results-container">
+    {% if error %}
+        <div class="error-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Error</h2>
+            <p>{{ error }}</p>
+            <a href="/" class="btn-primary">Try Again</a>
+        </div>
+    {% else %}
+        <div class="weather-header">
+            <h2>Weather Analysis for {{ place }}, {{ city }}</h2>
+            <p class="event-date">Event Date: {{ event_date }}</p>
+        </div>
+
+        <div class="main-weather-card {{ 'good-weather' if score >= 70 else 'bad-weather' }}">
+            <div class="weather-icon">
+                <img src="http://openweathermap.org/img/w/{{ weather_data.icon }}.png" alt="{{ weather_data.description }}">
+            </div>
+            <div class="weather-info">
+                <h3>Current Forecast</h3>
+                <div class="weather-details">
+                    <p><i class="fas fa-thermometer-half"></i> Temperature: {{ weather_data.temperature }}°C</p>
+                    <p><i class="fas fa-cloud"></i> Conditions: {{ weather_data.description.title() }}</p>
+                    <p><i class="fas fa-wind"></i> Wind Speed: {{ weather_data.wind_speed }} m/s</p>
+                    <p><i class="fas fa-tint"></i> Humidity: {{ weather_data.humidity }}%</p>
+                    <p><i class="fas fa-umbrella"></i> Precipitation: {{ weather_data.precipitation_prob }}%</p>
+                </div>
+            </div>
+            <div class="weather-score">
+                <div class="score-circle {{ 'good' if score >= 70 else 'bad' }}">
+                    <span class="score-value">{{ score }}/100</span>
+                </div>
+                <p class="score-label">
+                    {% if score >= 80 %}
+                        Excellent! Perfect for your event! 🎉
+                    {% elif score >= 70 %}
+                        Good! Your event should be fine! 👍
+                    {% elif score >= 60 %}
+                        Fair! Consider alternatives 🤔
+                    {% else %}
+                        Poor! Not ideal for outdoor events ❌
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if score < 70 %}
+            <div class="recommendations">
+                {% if better_days %}
+                    <div class="recommendation-section">
+                        <h3><i class="fas fa-calendar-day"></i> Better Days</h3>
+                        <div class="recommendation-cards">
+                            {% for day in better_days %}
+                                <div class="recommendation-card">
+                                    <h4>{{ day.date.strftime('%Y-%m-%d') }}</h4>
+                                    <p>Score: {{ day.score }}/100</p>
+                                    <p>Temp: {{ day.weather.temperature }}°C</p>
+                                    <p>{{ day.weather.description.title() }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if better_locations %}
+                    <div class="recommendation-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Better Locations</h3>
+                        <div class="recommendation-cards">
+                            {% for location in better_locations %}
+                                <div class="recommendation-card">
+                                    <h4>{{ location.name }}</h4>
+                                    <p>Score: {{ location.score }}/100</p>
+                                    <p>Temp: {{ location.weather.temperature }}°C</p>
+                                    <p>{{ location.weather.description.title() }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="action-buttons">
+            <a href="/" class="btn-primary">
+                <i class="fas fa-search"></i> New Search
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
