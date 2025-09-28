@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Planner</title>
+  <link rel="stylesheet" href="second.css">
+</head>
+<body>
+
+
+  <form id="eventForm">
+    <div>
+      <label for="eventName">Event Name:</label>
+      <input type="text" id="eventName" name="eventName" required>
+    </div>
+
+    <!-- Free text date -->
+    <div>
+      <label for="eventDateText">Event Date</label>
+      <input type="text" id="eventDateText" name="eventDateText" 
+             placeholder="e.g. First week of July">
+    </div>
+
+    <!-- Calendar date -->
+    <div>
+      <label for="eventDateCalendar">Event Date </label>
+      <input type="date" id="eventDateCalendar" name="eventDateCalendar">
+    </div>
+
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Modal -->
+  <div class="modal" id="resultModal">
+    <div class="modal-content">
+      <h2>Search Result</h2>
+      <p id="resultText">This is where the backend result will appear.</p>
+      <button class="close-btn" id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("eventForm");
+    const modal = document.getElementById("resultModal");
+    const closeModal = document.getElementById("closeModal");
+    const resultText = document.getElementById("resultText");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("eventName").value;
+      const textDate = document.getElementById("eventDateText").value;
+      const calendarDate = document.getElementById("eventDateCalendar").value;
+
+      // Prefer calendar date if available
+      let date = calendarDate || textDate || "No date provided";
+
+      resultText.textContent = `Searching for "${name}" on "${date}"...`;
+
+      modal.style.display = "flex";
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // Close when clicking outside modal content
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
