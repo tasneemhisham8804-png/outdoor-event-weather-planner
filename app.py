@@ -17,8 +17,8 @@ app = Flask(__name__)
 class WeatherPlanner:
     def __init__(self):
         # Get API keys from .env file
-        self.openweather_api_key = os.getenv('OPENWEATHER_API_KEY')
-        self.opencage_api_key = os.getenv('OPENCAGE_API_KEY')
+        self.openweather_api_key = os.getenv('5100c0a8970e180c497140b47ca58998')
+        self.opencage_api_key = os.getenv('953b73b1da854a14aa917ece77d7bc97')
         self.tf = TimezoneFinder()
 
         # Weather scoring rules
