@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from timezonefinder import TimezoneFinder
 import pytz
 
+# Load .env file
 load_dotenv()
 
 app = Flask(__name__)
@@ -15,17 +16,19 @@ app = Flask(__name__)
 
 class WeatherPlanner:
     def __init__(self):
+        # Get API keys from .env file
         self.openweather_api_key = os.getenv('OPENWEATHER_API_KEY')
         self.opencage_api_key = os.getenv('OPENCAGE_API_KEY')
         self.tf = TimezoneFinder()
 
+        # Weather scoring rules
         self.excellent_conditions = {'clear', 'sunny'}
         self.good_conditions = {'few clouds', 'scattered clouds', 'broken clouds', 'overcast clouds'}
         self.bad_conditions = {'rain', 'drizzle', 'snow', 'thunderstorm', 'heavy rain'}
 
-        self.ideal_temp_range = (18, 28)
-        self.max_wind_speed = 15
-        self.max_precipitation_prob = 30
+        self.ideal_temp_range = (18, 28)  # °C
+        self.max_wind_speed = 15  # m/s
+        self.max_precipitation_prob = 30  # %
 
     def get_coordinates(self, country, city, place):
         try:
@@ -219,4 +222,8 @@ def check_weather():
 
 
 if __name__ == '__main__':
+    # Debug: show if keys are loaded
+    print("OpenWeather Key:", os.getenv("OPENWEATHER_API_KEY"))
+    print("OpenCage Key:", os.getenv("OPENCAGE_API_KEY"))
+
     app.run(debug=True)
