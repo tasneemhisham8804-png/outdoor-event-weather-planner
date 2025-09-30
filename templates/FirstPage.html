@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Will It Rain on My Parade?</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    #map {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Will It Rain on My Parade?</h1>
-    <!-- ✅ Added helpful note in placeholder -->
-    <input 
-      type="text" 
-      id="locationInput" 
-      placeholder="Choose a region (country or city)..." 
-    />
+    <input type="text" id="locationInput" placeholder="Choose a region (city or country)..." />
     <button onclick="searchLocation()">Search</button>
   </header>
 
@@ -22,9 +25,17 @@
     <canvas id="canvasOne"></canvas>
   </div>
 
-  <!-- ✅ WorldWindJS -->
+  <!-- Google Map -->
+  <div id="map"></div>
+
+  <!-- WorldWind -->
   <script src="https://unpkg.com/worldwindjs@1.7.0/build/dist/worldwind.min.js"></script>
+
+  <!-- Google Maps API -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
-
