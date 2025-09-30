@@ -48,8 +48,16 @@ function searchLocation() {
     .then(data => {
       if (data.results && data.results.length > 0) {
         const { lat, lng } = data.results[0].geometry;
+
+        // Fly to location on WorldWind
         wwd.goTo(new WorldWind.Position(lat, lng, 1000000));
         addMarker(lat, lng);
+
+        // ✅ Redirect to Google Maps with chosen location
+        setTimeout(() => {
+          const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+          window.open(mapsUrl, "_blank"); // opens in new tab
+        }, 2000); // wait 2 seconds so user sees animation before redirect
       } else {
         alert("Location not found.");
       }
