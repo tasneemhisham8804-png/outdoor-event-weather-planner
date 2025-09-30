@@ -1,100 +1,4 @@
-/* ===== Page Background ===== */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-
-  /* Fullscreen background image */
-  background: url("second.jpg") no-repeat center center fixed;
-  background-size: cover;
-
-  /* Center form block */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-
-  color: white;
-  text-align: center;
-}
-
-/* ===== Form Block ===== */
-form {
-  background: rgba(0, 0, 0, 0.65); /* semi-transparent box */
-  padding: 30px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  max-width: 420px;
-  width: 100%;
-  align-items: center; /* center all content inside */
-}
-
-/* Labels */
-label {
-  font-weight: bold;
-  display: block;
-  text-align: center;
-  margin-bottom: 5px;
-}
-
-/* Inputs & Button */
-input, button {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: none;
-  text-align: center;
-  width: 85%;
-  max-width: 320px;
-  box-sizing: border-box;
-}
-
-/* Search Button */
-button {
-  background: #4CAF50;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #45a049;
-}
-
-/* ===== Popup (Modal) ===== */
-.modal {
-  display: none; /* hidden by default */
-  position: fixed;
-  top: 0; 
-  left: 0;
-  width: 100%; 
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  justify-content: center;
-  align-items: center;
-}
-
-/* Popup Content Box */
-.modal-content {
-  background: #fff;
-  padding: 25px;
-  border-radius: 10px;
-  min-width: 300px;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  color: black;
-}
-
-/* Close Button */
-.close-btn {
-  background: crimson;
-  color: white;
-  border: none;
-  padding: 10/* Reset */
+/* ===== Reset ===== */
 * {
   margin: 0;
   padding: 0;
@@ -105,50 +9,61 @@ html, body {
   height: 100%;
   width: 100%;
   font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
+  color: white;
 }
 
-/* Background (still image, optional) */
+/* ===== Background ===== */
 body {
   background: url('second.jpg') no-repeat center center fixed;
   background-size: cover;
+  overflow: hidden;
 }
 
-/* Header */
+/* ===== Header ===== */
 header {
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 12px 20px;
-  border-radius: 8px;
-  color: white;
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 14px 24px;
+  border-radius: 10px;
   text-align: center;
 }
 
-input[type="text"] {
+header h1 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+header input[type="text"] {
   padding: 8px 12px;
   border-radius: 5px;
   border: none;
-  width: 220px;
+  width: 240px;
   margin-right: 8px;
 }
 
-button {
+header button {
   padding: 8px 14px;
   border: none;
   border-radius: 5px;
-  background-color: #0e76a8;
+  background-color: #4CAF50;
+  font-weight: bold;
   color: white;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-/* Canvas container and canvas */
+header button:hover {
+  background-color: #45a049;
+}
+
+/* ===== WorldWind Globe ===== */
 #canvasContainer {
   width: 100vw;
-  height: 100vh;
+  height: 60vh;   /* Top 60% of the screen */
 }
 
 #canvasOne {
@@ -157,14 +72,9 @@ button {
   display: block;
 }
 
-
-
-  cursor: pointer;
-  margin-top: 20px;
-  border-radius: 6px;
-  transition: background 0.3s;
-}
-
-.close-btn:hover {
-  background: darkred;
+/* ===== Google Map ===== */
+#map {
+  width: 100vw;
+  height: 40vh;   /* Bottom 40% of the screen */
+  border-top: 4px solid rgba(255, 255, 255, 0.2);
 }
